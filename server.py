@@ -23,12 +23,13 @@ def application(env, start_response):
     env = Environment(loader=FileSystemLoader('templates')) #ruta donde se encuentran los templates
 
     template = env.get_template('index.html') # obtener el template 
-
+    numeros = [1,2,3]
     # lo renderizamos y almacenamos en una variable para retornar al cliente.
     html = template.render(
         {
             'title': 'Servidor en Python',
-            'name': 'Vane'
+            'name': 'Vane', 
+            'numeros':numeros
         }
     ) 
     # acá los valores estan hardcodeados pero podemos obtenerlos de una bd generando una conexion con la misma
