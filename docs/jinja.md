@@ -3,24 +3,23 @@
 Es una libreria para generar documentos HTML de forma rápida y simple.
 
 Al trabajar con Jinja2 hay que tener en cuenta 3 elementos importantes:
-    * Variables {{ variable }}
-    * Instrucciones {% instruccion %}
-    * Comentarios {# comentario #}
 
-### Uso de variables:
+* Variables {{ variable }}
+* Instrucciones {% instruccion %}
+* Comentarios {# comentario #}
+
+### Uso de variables
 
 Podemos enviar objetos al template
 
-~~~
-
+``` 
 <h2>Hola {{ username }} </h2>
 <p>
     Te encuentras en el curso {{ course.title }}
 </p>
+```
 
-~~~
-
-### Uso de condicionales:
+### Uso de condicionales
 
 ~~~
 
