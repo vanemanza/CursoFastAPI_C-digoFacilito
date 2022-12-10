@@ -2,3 +2,4 @@ Jinja2 == 3.1.2
 fastapi == 0.88.0
 uvicorn == 0.20.0
 pydantic == 1.10.2
+peewee == 3.15.4 
