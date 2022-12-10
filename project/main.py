@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from database import database as connection # importo la conexión a la bd
 
 app = FastAPI(title='Proyecto para reseñar peliculas', description='En este proyecto seremos capaces de reseñar peliculas', version=1)
 # para levantar el servidor ejecutamos en la terminal el comando -> uvicorn main:app --reload (para q reinice automaticamente)
@@ -6,9 +7,16 @@ app = FastAPI(title='Proyecto para reseñar peliculas', description='En este pro
 @app.on_event('startup')
 def startup():
     print ('La magia va a comenzar, arriba esos servidores 👾 !!!')
+    if connection.is_closed():
+        connection.connect
+        print(f'Connected - ready !')
+
 
 @app.on_event('shutdown')
 def shutdown():
+    if not connection.is_closed():
+        print(f'connection is close ') # no imprime!
+        connection.close
     print ('El servidor va a finalizar. Hasta la vista Servi 😎 !!!')    
 
 # con el decorador app.get registro una nueva ruta
