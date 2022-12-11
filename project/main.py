@@ -2,6 +2,8 @@ from fastapi import FastAPI
 from database import database as connection # importo la conexión a la bd
 from database import User, Movie, UserReview 
 
+from schemas import UserBaseModel
+
 app = FastAPI(title='Proyecto para reseñar peliculas', description='En este proyecto seremos capaces de reseñar peliculas', version=1)
 # para levantar el servidor ejecutamos en la terminal el comando -> uvicorn main:app --reload (para q reinice automaticamente)
 
@@ -35,3 +37,12 @@ async def index():
 
 # Resumen para poder registrar urls con fastapi, definimos una funcion asincrona, y la decoramos con la aplicacion, dependiendo del metodo, 
 # sera el metodo de la app q implementaremos, y el argumento es la ruta que queremos registrar.
+
+@app.post('/users')
+async def create_user(user: UserBaseModel):
+    
+    user = User.create(
+        username=user.username,
+        password =user.password
+    )
+    return user.id 
