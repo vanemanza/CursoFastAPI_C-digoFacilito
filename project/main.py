@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 from database import database as connection # importo la conexión a la bd
 from database import User, Movie, UserReview 
 
@@ -26,7 +26,7 @@ def shutdown():
 # con el decorador app.get registro una nueva ruta
 @app.get('/')
 async def index(): 
-    return "Vamo' Argentina carajo!!!!"
+    return "qué mirá Bobo?! 😁"
 
 # async indica q la función se va a ejecutar de  forma asincrona, o sea q si se realizan muchas peticiones al mismo tiempo sobre la misma url, 
 # podrán ser resueltas de forma asincrona.
@@ -41,10 +41,16 @@ async def index():
 @app.post('/users')
 async def create_user(user: UserBaseModel):
 
+    if User.select().where(User.username == user.username).exists():
+        return HTTPException(409, '🤚 Te ganaron de mano, el usuario ya existe! ')
+
     hash_password = User.create_password(user.password)
     
     user = User.create(
         username=user.username,
         password =hash_password
     )
-    return user.id 
+    return {
+        'id':user.id,
+        'username': user.username
+    }
