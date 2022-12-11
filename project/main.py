@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from database import database as connection # importo la conexión a la bd
+from database import User, Movie, UserReview 
 
 app = FastAPI(title='Proyecto para reseñar peliculas', description='En este proyecto seremos capaces de reseñar peliculas', version=1)
 # para levantar el servidor ejecutamos en la terminal el comando -> uvicorn main:app --reload (para q reinice automaticamente)
@@ -10,6 +11,7 @@ def startup():
     if connection.is_closed():
         connection.connect
         print(f'Connected - ready !')
+    connection.create_tables([User, Movie, UserReview])    
 
 
 @app.on_event('shutdown')
