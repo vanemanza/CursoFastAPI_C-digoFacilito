@@ -1,6 +1,6 @@
 from pydantic import BaseModel, validator
 
-class UserBaseModel(BaseModel):
+class UserRequestModel(BaseModel):
     username : str
     password : str
 
@@ -10,3 +10,11 @@ class UserBaseModel(BaseModel):
             raise ValueError('El nombre de usuario debe tener mas de 3 y menos de 50 caracteres.')
 
         return username    
+
+class UserResponseModel(BaseModel):
+    id: int
+    username: str
+
+    
+
+
