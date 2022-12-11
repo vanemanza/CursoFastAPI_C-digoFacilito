@@ -9,3 +9,12 @@ Para implementar validaciones con fastapi, nos apoyamos en la clase BaseModel, u
 
 En síntesis, para que la funcion create_user pueda ejecutarse, debe recibir un objeto del tipo UserBaseModel, el cual debe poseer los atributos descriptos en schema.py y cumplir con todas las validaciones.
 
+También podemos validar que el usuario que se quiere registrar no exista ya en la bd, ya que esto puede lanzar un error y dejar de funcionar.
+Para esto, agregamos una condición en nuestra función create_user (main.py).
+1) Hacemos una consulta a nuestra tabla:
+   - if User.select().where(User.username == user.username).exists():
+  
+          |     |_ método          |                      |_ método para ver si al menos un registro cumple con la condición
+          |_______ modelo          |_ comparamos el de la bd con el que envia el cliente
+
+   -  retornamos un HTTPException
