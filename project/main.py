@@ -50,4 +50,4 @@ async def create_user(user: UserRequestModel):
         username=user.username,
         password =hash_password
     )
-    return UserResponseModel(id=user.id, username=user.username)
+    return user
